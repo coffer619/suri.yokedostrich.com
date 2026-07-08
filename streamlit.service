@@ -1,0 +1,16 @@
+[Unit]
+Description=Suricata eve DuckDB Dashboard (Streamlit)
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+Type=simple
+User=suricata
+WorkingDirectory=/home/suricata
+Environment=PATH=/home/suricata/.local/bin:/usr/bin:/bin
+ExecStart=/home/suricata/.local/bin/streamlit run /home/suricata/suri_dashboard.py --server.address 127.0.0.1 --server.port 8765 --server.headless true --browser.gatherUsageStats false
+Restart=on-failure
+RestartSec=5
+
+[Install]
+WantedBy=multi-user.target

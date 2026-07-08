@@ -1,0 +1,25 @@
+[Unit]
+Description=Suricata eve.json -> DuckDB ingester
+# Suricata should be writing eve.json before we try to tail it. suricata
+# is installed as a systemd service (suricata.service), so order after it.
+After=suricata.service network-online.target
+Wants=network-online.target
+
+[Service]
+Type=simple
+User=suricata
+Group=suricata
+WorkingDirectory=/home/suricata
+Environment=PATH=/home/suricata/.local/bin:/usr/bin:/bin
+# --batch 50000   flush every 50k events
+# --read-gap 1.0  hold the write lock open for 1s after closing it (lets the
+#                 dashboard acquire the read lock between flushes)
+# --reopen-every 1 release the write lock after every batch flush
+ExecStart=/usr/bin/python3 /home/suricata/eve_tail2duckdb.py --eve /var/log/suricata/eve.json --db /home/suricata/eve.duckdb --batch 50000 --read-gap 1.0 --reopen-every 1
+Restart=on-failure
+RestartSec=5
+# Tailing a long-lived file is stateful; if it crashes, systemd restarts it
+# and it resumes from the saved offset (idempotent INSERT OR IGNORE).
+
+[Install]
+WantedBy=multi-user.target

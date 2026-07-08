@@ -1,0 +1,20 @@
+[Unit]
+Description=Palo Alto NGFW syslog -> DuckDB ingester
+After=network-online.target rsyslog.service
+Wants=network-online.target
+
+[Service]
+Type=simple
+User=suricata
+WorkingDirectory=/home/suricata
+Environment=PATH=/home/suricata/.local/bin:/usr/bin:/bin
+Environment=PALO_DUCKDB=/home/suricata/palo.duckdb
+ExecStart=/usr/bin/python3 /home/suricata/palo_ingest.py \
+    --db /home/suricata/palo.duckdb --tail \
+    --syslog /var/log/palo-alto.log \
+    --batch 5000 --read-gap 1.0 --reopen-every 1
+Restart=on-failure
+RestartSec=5
+
+[Install]
+WantedBy=multi-user.target

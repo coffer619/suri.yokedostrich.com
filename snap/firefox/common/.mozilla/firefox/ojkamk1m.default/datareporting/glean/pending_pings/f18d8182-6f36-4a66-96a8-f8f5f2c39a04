@@ -1,0 +1,3 @@
+/submit/firefox-desktop/bounce-tracking-protection/1/f18d8182-6f36-4a66-96a8-f8f5f2c39a04
+{"events":[{"timestamp":0,"category":"bounce.tracking.protection","name":"purge_action","extra":{"bounce_time":"1783126481","is_dry_run":"true","glean_timestamp":"1783133630573","site_host":"pi.ai","success":"true"}}]}
+{"headers":{},"body_has_info_sections":false,"ping_name":"bounce-tracking-protection"}

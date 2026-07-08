@@ -1,0 +1,67 @@
+# Sensitive / runtime files — NEVER commit
+*.duckdb
+*.duckdb.*
+*.offset
+*.wal
+
+# Cloudflare credentials
+.cloudflared/
+*.pem
+*.json
+
+# Streamlit secrets
+.streamlit/secrets.toml
+.streamlit/credentials.toml
+.streamlit/machine_id_v4
+
+# API keys / passwords
+fireworks*
+*api*key*
+
+# Logs
+*.log
+ingester.log
+fix_pks.log
+migrate.log
+capture_loss.log
+
+# Python
+__pycache__/
+*.pyc
+*.pyo
+.venv/
+venv/
+
+# OS / editor
+.DS_Store
+*.swp
+*~
+.bash_history
+.lesshst
+.cache/
+.config/
+.local/
+.duckdb/
+
+# Suricata Zeek logs (not part of this project)
+conn.log
+dns.log
+files.log
+http.log
+known_hosts.log
+known_services.log
+loaded_scripts.log
+
+# Downloads (MIB files etc.)
+Downloads/
+
+# One-shot scripts (already run, not needed for new installs)
+fix_pks.py
+migrate_db.py
+reclaim_space.py
+
+# pi session context (private)
+pi-suri-yokedostrich-context.md
+
+# Screenshots / UX review
+ux_review/

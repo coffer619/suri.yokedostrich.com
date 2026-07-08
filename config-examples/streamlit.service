@@ -1,0 +1,21 @@
+[Unit]
+Description=Network & Security Dashboard (Streamlit: Local Network + Firewall)
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+Type=simple
+User=YOUR_USER
+WorkingDirectory=/home/YOUR_USER
+Environment=PATH=/home/YOUR_USER/.local/bin:/usr/bin:/bin
+Environment=EVE_DUCKDB=/home/YOUR_USER/eve.duckdb
+Environment=PALO_DUCKDB=/home/YOUR_USER/palo.duckdb
+Environment=PALO_METRICS_DUCKDB=/home/YOUR_USER/palo_metrics.duckdb
+ExecStart=/home/YOUR_USER/.local/bin/streamlit run /home/YOUR_USER/app.py \
+    --server.address 127.0.0.1 --server.port 8765 --server.headless true \
+    --browser.gatherUsageStats false
+Restart=on-failure
+RestartSec=5
+
+[Install]
+WantedBy=multi-user.target

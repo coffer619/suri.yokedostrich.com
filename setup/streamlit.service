@@ -1,0 +1,20 @@
+[Unit]
+Description=Network & Security Dashboard (Streamlit: Local Network + Firewall)
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+Type=simple
+User=suricata
+WorkingDirectory=/home/suricata
+Environment=PATH=/home/suricata/.local/bin:/usr/bin:/bin
+Environment=EVE_DUCKDB=/home/suricata/eve.duckdb
+Environment=PALO_DUCKDB=/home/suricata/palo.duckdb
+ExecStart=/home/suricata/.local/bin/streamlit run /home/suricata/app.py \
+    --server.address 127.0.0.1 --server.port 8765 --server.headless true \
+    --browser.gatherUsageStats false
+Restart=on-failure
+RestartSec=5
+
+[Install]
+WantedBy=multi-user.target

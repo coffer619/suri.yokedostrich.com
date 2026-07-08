@@ -1,0 +1,22 @@
+# Cloudflare Tunnel config — example
+# Copy to ~/.cloudflared/config.yml and replace the values.
+#
+# Create a tunnel first:
+#   cloudflared tunnel login
+#   cloudflared tunnel create <tunnel-name>
+#   # Note the UUID and credentials file path from the output.
+#
+# Then route DNS:
+#   cloudflared tunnel route dns <tunnel-name> your-dashboard.example.com
+
+tunnel: <YOUR-TUNNEL-UUID>
+credentials-file: /home/YOUR_USER/.cloudflared/<YOUR-TUNNEL-UUID>.json
+
+# Transport: QUIC (UDP 7844, outbound) is the default and recommended.
+# If your firewall blocks UDP 7844 and allows TCP 7844, use http2 instead.
+protocol: quic
+
+ingress:
+  - hostname: your-dashboard.example.com
+    service: http://localhost:8765
+  - service: http_status:404

@@ -1,0 +1,20 @@
+[Unit]
+Description=Cloudflare Tunnel (suricata)
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+# No sandboxing/User= here on purpose: cloudflared needs to read the
+# credentials and config under /home/suricata/.cloudflared, and we want it
+# to run as the suricata user so file ownership stays consistent.
+User=suricata
+Group=suricata
+WorkingDirectory=/home/suricata
+ExecStart=/usr/bin/cloudflared --config /home/suricata/.cloudflared/config.yml tunnel run suricata
+Restart=on-failure
+RestartSec=5
+# Give cloudflared a moment to release the previous QUIC connections on restart
+TimeoutStopSec=15
+
+[Install]
+WantedBy=multi-user.target

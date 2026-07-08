@@ -1,0 +1,20 @@
+[Unit]
+Description=Palo Alto NGFW SNMP poller -> DuckDB metrics
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+Type=simple
+User=suricata
+Group=suricata
+WorkingDirectory=/home/suricata
+Environment=PATH=/home/suricata/.local/bin:/usr/bin:/bin
+Environment=PALO_DUCKDB=/home/suricata/palo.duckdb
+ExecStart=/usr/bin/python3 /home/suricata/palo_snmp_poll.py \
+    --host YOUR_NGFW_IP --community YOUR_COMMUNITY --interval 300 \
+    --db /home/suricata/palo_metrics.duckdb
+Restart=on-failure
+RestartSec=10
+
+[Install]
+WantedBy=multi-user.target
