@@ -65,3 +65,17 @@ pi-suri-yokedostrich-context.md
 
 # Screenshots / UX review
 ux_review/
+
+# OS / runtime caches (not part of this project)
+.npm/
+snap/
+.pi/
+.bash_logout
+.bashrc
+.profile
+.sudo_as_admin_successful
+cloudflared.service
+eve_tail2duckdb.service
+streamlit.service
+nohup.out
+streamlit instructions

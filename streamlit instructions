@@ -1,5 +1,0 @@
-   export PATH="$HOME/.local/bin:$PATH"                                                                                                                                                         
-   cd /home/suricata                                                                                                                                                                            
-   streamlit run suri_dashboard.py \                                                                                                                                                            
-       --server.address 0.0.0.0 --server.port 8765 \                                                                                                                                            
-       --server.headless true --browser.gatherUsageStats false 

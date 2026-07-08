@@ -1,9 +1,0 @@
-usage: eve_tail2duckdb.py [-h] [--eve EVE] [--db DB] [--batch BATCH]
-                          [--poll POLL] [--from-start]
-eve_tail2duckdb.py: error: unrecognized arguments:  
-usage: eve_tail2duckdb.py [-h] [--eve EVE] [--db DB] [--batch BATCH]
-                          [--poll POLL] [--from-start]
-eve_tail2duckdb.py: error: unrecognized arguments:  
-usage: eve_tail2duckdb.py [-h] [--eve EVE] [--db DB] [--batch BATCH]
-                          [--poll POLL] [--from-start]
-eve_tail2duckdb.py: error: unrecognized arguments:  
